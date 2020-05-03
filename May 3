@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        map<char, int> mag_count;
+        
+        
+        for(char magazineChar : magazine) {
+            mag_count[magazineChar]++;
+        }
+        
+        for(char ransomChar : ransomNote) {
+            map<char, int>::iterator it = mag_count.find(ransomChar);
+            if((it == mag_count.end()) || (it->second == 0)) {
+                return false;
+            }
+            else {
+                mag_count[ransomChar]--;
+            }
+        }
+        return true;
+    }
+};
