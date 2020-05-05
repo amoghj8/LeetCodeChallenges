@@ -1,0 +1,22 @@
+class Solution {
+    public int firstUniqChar(String s) {
+        LinkedHashMap<Character, Integer> linkedHashMap = new LinkedHashMap<>();
+        for(int i=0; i< s.length(); i++) {
+            if(!linkedHashMap.containsKey(s.charAt(i))){
+                linkedHashMap.put(s.charAt(i), i);
+            }
+            else{
+                linkedHashMap.replace(s.charAt(i), -1);
+            }
+        }
+        Iterator<Integer> iterator = linkedHashMap.values().iterator();
+        while(iterator.hasNext()) {
+            Integer next = iterator.next();
+            if(next==-1)
+                continue;
+            else
+                return next;
+        }
+        return -1;
+    }
+}
