@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        map<int, int> majorityMap;
+        int majorityEle = INT_MAX;
+        for(auto num : nums){
+            majorityMap[num]++;
+        }
+        map<int,int>::iterator it = majorityMap.begin();
+        for(;it!=majorityMap.end();it++) {
+            if(it->second > (nums.size()/2))
+                majorityEle = it->first;
+        }
+        return majorityEle;
+    }
+};
