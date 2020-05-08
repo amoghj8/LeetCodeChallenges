@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+class Solution {
+public:
+     
+        float findSlope(int prev_x_cor, int prev_y_cor, int curr_x_cor, int curr_y_cor) {
+                int y_diff = curr_y_cor - prev_y_cor;
+                int x_diff = curr_x_cor - prev_x_cor;
+            
+                if(x_diff == 0) {
+                    return FLT_MAX;
+                }
+                else{
+                    return (y_diff / x_diff);
+                }
+        }
+    
+        bool compareSlope(float prev_slope, float curr_slope) {
+                return prev_slope==curr_slope;
+        }
+    
+    bool checkStraightLine(vector<vector<int>>& coordinates) {
+        if(coordinates.size()==2)
+            return true;
+        float prev_slope;
+        for(int i=0; i+1<coordinates.size(); i++) {
+            for(int j=i+1; j+1<coordinates.size(); j++) {
+                
+                if(i==0 && j==1) {
+                    prev_slope = findSlope(coordinates[0][0], coordinates[0][1], coordinates[1][0], coordinates[1][1]);
+                    continue;
+                }
+                
+                float curr_slope = findSlope(coordinates[i][0], coordinates[i][1], coordinates[j][0], coordinates[j][1]);
+               if(!compareSlope(prev_slope, curr_slope)){
+                   return false;
+               }
+            prev_slope = curr_slope;
+               
+            }
+        }
+       return true;
+    }
+};
