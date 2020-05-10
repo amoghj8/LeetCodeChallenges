@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int findJudge(int N, vector<vector<int>>& trust) {
+        if(!trust.size())
+            return N;
+        if(trust.size()==1)
+            return trust[0][1];
+        
+        map<int , vector<int>> trustMap;
+        map<int , vector<int>>::iterator it;
+        set<int> trusters;
+        vector<int> potentialJudges;
+        for(int i=0;i<trust.size();i++) {
+            trustMap[trust[i][1]].push_back(trust[i][0]);
+            trusters.insert(trust[i][0]);
+        }
+        
+        for(it=trustMap.begin(); it!=trustMap.end();it++) {
+            if(it->second.size()==trusters.size())
+                potentialJudges.push_back(it->first);
+        }
+        if(potentialJudges.size()==1)
+            return potentialJudges[0];
+        return -1;
+    }
+};
